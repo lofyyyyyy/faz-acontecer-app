@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'cad_user.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatelessWidget {
   @override
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Colors.purple,
-      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -30,8 +31,9 @@ class LoginPage extends StatelessWidget {
               Container(
                 width: 250,
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'E-Mail',
+                    labelText: 'Email',
                   ),
                 ),
               ),
@@ -39,6 +41,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 width: 250,
                 child: TextField(
+                  controller: senhaController,
                   decoration: InputDecoration(
                     labelText: 'Senha',
                   ),
@@ -47,10 +50,42 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ));
+                onPressed: () async {
+                  final Map<String, String> data = {
+                    'email': emailController.text,
+                    'senha': senhaController.text,
+                  };
+
+                  final String dataJson = jsonEncode(data);
+
+                  final response = await http.post(
+                    Uri.parse('https://localhost:7127/Login'),
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: dataJson,
+                  );
+
+                  if (response.statusCode == 200) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ));
+                  } if (response.statusCode == 401) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Email ou senha inválidos'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                  else if(response.statusCode == 500) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Erro na solicitação: ${response.statusCode}'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.purple,

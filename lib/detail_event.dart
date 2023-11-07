@@ -1,41 +1,64 @@
+import 'package:faz_acontecer/aperitivos_evento.dart';
+import 'package:faz_acontecer/categoria_decoracoes_evento.dart';
+import 'package:faz_acontecer/convidados_evento.dart';
+import 'package:faz_acontecer/decoracoes_evento.dart';
+import 'package:faz_acontecer/home.dart';
+import 'package:faz_acontecer/info_evento.dart';
+import 'package:faz_acontecer/saldo_evento.dart';
 import 'package:flutter/material.dart';
+import 'categoria_aperitivos_evento.dart';
 import 'event.dart';
 
 
 class DetalhesEventoScreen extends StatelessWidget {
-  final Evento evento; // Recebe o evento como argumento
 
-  DetalhesEventoScreen(this.evento);
+  DetalhesEventoScreen();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detalhes do Evento'),
-        backgroundColor: Colors.purple,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(evento.imagem), 
-            SizedBox(height: 16),
-            Text(
-              evento.nome,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ), // Exibe o nome do evento
-            SizedBox(height: 16),
-            Text(
-              'Data: 12 de novembro de 2023', 
-              style: TextStyle(fontSize: 18),
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 5, // Número de abas
+        child: Scaffold(
+          appBar: AppBar(
+            leading: BackButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ));
+              },
             ),
-            SizedBox(height: 16),
-            Text(
-              'Descrição do evento: Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
+            title: Text('Detalhes do Evento'),
+            backgroundColor: Colors.purple,
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  icon: Icon(Icons.info),
+                ),
+                Tab(
+                  icon: Icon(Icons.group),
+                ),
+                Tab(
+                  icon: Icon(Icons.fastfood),
+                ),
+                Tab(
+                  icon: Icon(Icons.celebration),
+                ),
+                Tab(
+                  icon: Icon(Icons.attach_money),
+                ),
+              ],
             ),
-          ],
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              InfoEvento(),
+              ConvidadosEvento(),
+              CategoriaAperitivosEvento(),
+              CategoriaDecoracoesEvento(),
+              SaldoEvento(),
+            ],
+          ),
         ),
       ),
     );

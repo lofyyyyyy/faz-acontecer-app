@@ -1,80 +1,67 @@
-import 'package:faz_acontecer/login_page.dart';
+import 'package:faz_acontecer/aperitivos_evento.dart';
 import 'package:flutter/material.dart';
-import 'cad_event.dart'; 
+import 'cad_event.dart';
 import 'detail_event.dart';
 import 'event.dart';
 
-class HomeScreen extends StatelessWidget {
+class CategoriaAperitivosEvento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Colors.purple,
-        leading: BackButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LoginPage(),
-            ));
-          },
-        ),
-      ),
       body: Center(
         child: Column( // Usando uma coluna para empilhar widgets verticalmente
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Bem vindo(a),',
-                    style: TextStyle(
-                      fontSize: 15,
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Categorias',
+                      style: TextStyle(
+                        fontSize: 20, // Tamanho de fonte maior
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Sabine Freiman',
-                    style: TextStyle(
-                      fontSize: 25, // Tamanho de fonte maior
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              )
+                  ],
+                )
             ),
             Container(
-              margin: EdgeInsets.all(16.0),
-              padding: EdgeInsets.all(16.0),
+              padding:  EdgeInsets.only(
+                left: 50.0,
+                right: 50.0,
+                top: 10.0, // Reduzido o valor do espaçamento superior
+                bottom: 10.0, // Reduzido o valor do espaçamento inferior
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => DetalhesEventoScreen(),
+                          builder: (context) => AperitivosEvento(),
                         ),
                       );
                     },
                     child:  CustomCard(
-                      image: AssetImage('assets/images/icone-calendario.png'),
-                      name: 'Encontro Brilhante',
+                      image: AssetImage('assets/images/categorias/categoriaSalgados.png'),
+                      name: 'Salgados',
                     ),
                   ),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => DetalhesEventoScreen(),
+                          builder: (context) => AperitivosEvento(),
                         ),
                       );
                     },
                     child:  CustomCard(
-                      image: AssetImage('assets/images/icone-calendario.png'),
-                      name: 'Evento Encantado',
+                      image: AssetImage('assets/images/categorias/categoriaRefrigerantes.png'),
+                      name: 'Refrigerantes',
                     ),
                   ),
                 ],
@@ -98,15 +85,20 @@ class CustomCard extends StatelessWidget {
     return Card(
       elevation: 5,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image(
             image: image,
-            width: 100,
-            height: 100,
+            height: 70,
             fit: BoxFit.cover, // Ajusta a imagem ao espaço do Card
           ),
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.only(
+              left: 50.0,
+              right: 50.0,
+              top: 20.0, // Reduzido o valor do espaçamento superior
+              bottom: 20.0, // Reduzido o valor do espaçamento inferior
+            ),
             child: Center(
               child: Text(
                 name,
