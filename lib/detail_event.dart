@@ -1,30 +1,31 @@
-import 'package:faz_acontecer/aperitivos_evento.dart';
-import 'package:faz_acontecer/categoria_decoracoes_evento.dart';
-import 'package:faz_acontecer/convidados_evento.dart';
-import 'package:faz_acontecer/decoracoes_evento.dart';
-import 'package:faz_acontecer/home.dart';
-import 'package:faz_acontecer/info_evento.dart';
+import 'package:faz_acontecer/Models/usuario.dart';
 import 'package:faz_acontecer/saldo_evento.dart';
 import 'package:flutter/material.dart';
-import 'categoria_aperitivos_evento.dart';
-import 'event.dart';
 
+import 'Models/evento.dart';
+import 'categoria_aperitivos_evento.dart';
+import 'categoria_decoracoes_evento.dart';
+import 'convidados_evento.dart';
+import 'home.dart';
+import 'info_evento.dart';
 
 class DetalhesEventoScreen extends StatelessWidget {
+  final Usuario usuario;
+  final CustomEvent? evento;
 
-  DetalhesEventoScreen();
+  DetalhesEventoScreen(this.usuario, this.evento);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 5, // Número de abas
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             leading: BackButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => HomeScreen(this.usuario),
                 ));
               },
             ),

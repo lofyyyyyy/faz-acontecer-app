@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Models/usuario.dart';
 import 'home.dart';
 import 'cad_user.dart';
 import 'package:http/http.dart' as http;
@@ -67,8 +68,10 @@ class LoginPage extends StatelessWidget {
                   );
 
                   if (response.statusCode == 200) {
+                    Usuario usuario = Usuario.fromJson(jsonDecode(response.body));
+
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                        builder: (context) => HomeScreen(usuario),
                     ));
                   } if (response.statusCode == 401) {
                     ScaffoldMessenger.of(context).showSnackBar(
