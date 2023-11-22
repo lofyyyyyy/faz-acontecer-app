@@ -6,6 +6,7 @@ class CadastroEvento extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Visualização de Eventos'),
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: <Widget>[

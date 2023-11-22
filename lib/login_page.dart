@@ -91,7 +91,11 @@ class LoginPage extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
+                  primary: Colors.purple, // Background color of the button
+                  onPrimary: Colors.white, // Text color of the button
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0), // Adjust the radius as needed
+                  ),
                 ),
                 child: Text('Entrar'),
               ),

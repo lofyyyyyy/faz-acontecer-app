@@ -31,6 +31,7 @@ class DetalhesEventoScreen extends StatelessWidget {
             ),
             title: Text('Detalhes do Evento'),
             backgroundColor: Colors.purple,
+            foregroundColor: Colors.white,
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
