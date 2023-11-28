@@ -63,7 +63,7 @@ class _DetalhesEventoScreenState extends State<DetalhesEventoScreen> {
           body: TabBarView(
             children: <Widget>[
               InfoEvento(widget.usuario, onSaveEvento, widget.evento),
-              ConvidadosEvento(),
+              ConvidadosEvento(widget.usuario, widget.evento),
               CategoriaAperitivosEvento(),
               CategoriaDecoracoesEvento(),
               SaldoEvento(),
