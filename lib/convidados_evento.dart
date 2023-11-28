@@ -51,7 +51,7 @@ class _ConvidadosEvento extends State<ConvidadosEvento> {
       if (response.statusCode == 200) {
         List<dynamic> convidadosList = jsonDecode(response.body) as List;
         convidados = convidadosList.map((json) => Convidado.fromJson(json)).toList();
-        print('Convidados ${convidados.length}');
+
         return convidados.map((convidado) {
           return CardData(
               icon: Icons.person,
@@ -268,7 +268,6 @@ class CardWidget extends StatelessWidget {
   }
 
   void _showAddGuestModalUpdateConvidado(BuildContext context)  {
-    print('onTap triggered!');
     TextEditingController nomeConvidadoController = TextEditingController();
     TextEditingController emailConvidadeController = TextEditingController();
     TextEditingController telefoneConvidadoController = TextEditingController();

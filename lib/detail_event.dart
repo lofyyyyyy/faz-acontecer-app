@@ -1,9 +1,9 @@
 import 'package:faz_acontecer/Models/usuario.dart';
+import 'package:faz_acontecer/aperitivos_evento.dart';
 import 'package:faz_acontecer/saldo_evento.dart';
 import 'package:flutter/material.dart';
 
 import 'Models/evento.dart';
-import 'categoria_aperitivos_evento.dart';
 import 'categoria_decoracoes_evento.dart';
 import 'convidados_evento.dart';
 import 'home.dart';
@@ -64,7 +64,7 @@ class _DetalhesEventoScreenState extends State<DetalhesEventoScreen> {
             children: <Widget>[
               InfoEvento(widget.usuario, onSaveEvento, widget.evento),
               ConvidadosEvento(widget.usuario, widget.evento),
-              CategoriaAperitivosEvento(),
+              AperitivosEvento(widget.usuario, widget.evento),
               CategoriaDecoracoesEvento(),
               SaldoEvento(),
             ],
