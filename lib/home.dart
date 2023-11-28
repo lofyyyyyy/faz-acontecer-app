@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Usuario usuario;
+  Usuario usuario;
 
   HomeScreen(this.usuario);
 
@@ -57,16 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 print('Evento selecionado: $eventoSelecionado');
               });
             },
+            usuario: widget.usuario,
           );
         }).toList();
       } else {
-        // Tratar erros aqui, como exibir uma mensagem para o usuário
-        return []; // Retorna uma lista vazia em caso de erro
+        return [];
       }
     } catch (error) {
-      // Tratar erros aqui, como exibir uma mensagem para o usuário
       print('Erro ao obter eventos: $error');
-      return []; // Retorna uma lista vazia em caso de erro
+      return [];
     }
   }
 
@@ -182,6 +181,7 @@ class CustomCard extends StatefulWidget {
   CustomEvent? eventoSelecionado;
   final VoidCallback onTap;
   final Function(CustomEvent?) onCardTap;
+  final Usuario usuario;
 
   CustomCard({
     required this.image,
@@ -190,6 +190,7 @@ class CustomCard extends StatefulWidget {
     required this.eventoSelecionado,
     required this.onTap,
     required this.onCardTap,
+    required this.usuario,
   });
 
   @override
@@ -201,7 +202,9 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onCardTap(widget.eventos.firstWhere((evento) => evento.nome == widget.name));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => DetalhesEventoScreen(widget.usuario, widget.eventos.firstWhere((evento) => evento.nome == widget.name)),
+        ));
       },
       child: Container(
         width: 200.0, // Defina a largura desejada para os cards

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class CadastroEvento extends StatelessWidget {
   @override
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

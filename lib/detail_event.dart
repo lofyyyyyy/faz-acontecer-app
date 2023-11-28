@@ -9,12 +9,18 @@ import 'convidados_evento.dart';
 import 'home.dart';
 import 'info_evento.dart';
 
-class DetalhesEventoScreen extends StatelessWidget {
+class DetalhesEventoScreen extends StatefulWidget {
   final Usuario usuario;
-  final CustomEvent? evento;
+  CustomEvent? evento;
 
   DetalhesEventoScreen(this.usuario, this.evento);
 
+  @override
+  _DetalhesEventoScreenState createState() => _DetalhesEventoScreenState();
+}
+
+
+class _DetalhesEventoScreenState extends State<DetalhesEventoScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +31,7 @@ class DetalhesEventoScreen extends StatelessWidget {
             leading: BackButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomeScreen(this.usuario),
+                  builder: (context) => HomeScreen(widget.usuario),
                 ));
               },
             ),
@@ -33,6 +39,8 @@ class DetalhesEventoScreen extends StatelessWidget {
             backgroundColor: Colors.purple,
             foregroundColor: Colors.white,
             bottom: TabBar(
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
               tabs: <Widget>[
                 Tab(
                   icon: Icon(Icons.info),
@@ -54,7 +62,7 @@ class DetalhesEventoScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              InfoEvento(),
+              InfoEvento(widget.usuario, onSaveEvento, widget.evento),
               ConvidadosEvento(),
               CategoriaAperitivosEvento(),
               CategoriaDecoracoesEvento(),
@@ -64,5 +72,11 @@ class DetalhesEventoScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onSaveEvento(CustomEvent evento) {
+    setState(() {
+      widget.evento = evento;
+    });
   }
 }
