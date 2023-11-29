@@ -65,7 +65,7 @@ class _DetalhesEventoScreenState extends State<DetalhesEventoScreen> {
               ConvidadosEvento(widget.usuario, widget.evento),
               AperitivosEvento(widget.usuario, widget.evento),
               DecoracoesEvento(widget.usuario, widget.evento),
-              SaldoEvento(),
+              SaldoEvento(widget.usuario, widget.evento),
             ],
           ),
         ),

@@ -69,6 +69,10 @@ class _ConvidadosEvento extends State<ConvidadosEvento> {
     }
   }
 
+  Future<void> updateConvidados() async {
+    await getConvidados();
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: CardListScreen(this, widget.evento, null, widget.usuario),
@@ -183,9 +187,6 @@ class CardListScreen extends StatelessWidget {
                       ),
                     );
 
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ConvidadosEvento(usuario, evento),
-                    ));
                   } if (response.statusCode == 401) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -203,7 +204,11 @@ class CardListScreen extends StatelessWidget {
                     );
                   }
                 }
+
+                await convidadosEvento.updateConvidados();
+
                 Navigator.of(context).pop();
+
               },
               child: Text('Adicionar'),
             ),
@@ -393,6 +398,8 @@ class CardWidget extends StatelessWidget {
                 }
 
                 Navigator.of(context).pop();
+
+                //await convidadosEvento.updateConvidados();
               },
               child: Text('Atualizar'),
             ),
