@@ -95,6 +95,8 @@ class CardListScreen extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Erro ao carregar os convidados'));
+          } else if(snapshot.data?.length == 0) {
+            return Center(child: Text('Nenhum Convidado Registrado'));
           } else {
             List<CardData> convidados = snapshot.data ?? [];
             return ListView.builder(

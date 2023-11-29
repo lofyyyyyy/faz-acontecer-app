@@ -56,7 +56,7 @@ class _AperitivosEvento extends State<AperitivosEvento> {
         return [];
       }
     } catch (error) {
-      print('Erro ao obter eventos: $error');
+      print('Erro ao obter aperitivos: $error');
       return [];
     }
   }
@@ -127,6 +127,8 @@ class _AperitivosEvento extends State<AperitivosEvento> {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Erro ao carregar os aperitivos'));
+            } else if(snapshot.data?.length == 0) {
+              return Center(child: Text('Nenhum Aperitivo Registrada'));
             } else {
               List<Item> aperitivos = snapshot.data ?? [];
               return  ListView.builder(

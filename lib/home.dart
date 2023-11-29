@@ -129,6 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return CircularProgressIndicator();
                     } else if (snapshot.hasError) {
                       return Text('Erro ao carregar eventos');
+                    } else if(snapshot.data?.length == 0) {
+                      return Center(child: Text('Nenhum Evento Registrado'));
                     } else if (snapshot.data != null) {
                       List<Widget> customCardRows = [];
 
